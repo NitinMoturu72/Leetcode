@@ -54,3 +54,10 @@ class Solution:
             tail.next = list2
 
         return dummy.next 
+    
+# Iterative Solution:
+# We create a dummy node to serve as the starting point of the merged list and a tail pointer to keep track of the last node in the merged list.
+# We iterate through both lists, comparing the current nodes of list1 and list2. We append the smaller node to the merged list and move the corresponding pointer forward.
+# After the loop, if there are remaining nodes in either list, we append them to the merged list.
+# Time complexity is O(n + m) where n and m are the lengths of list1 and list2 respectively,
+# Space complexity is O(1) since we are using a constant amount of extra space.
