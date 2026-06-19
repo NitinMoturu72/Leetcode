@@ -69,3 +69,36 @@ class Solution:
 # The time complexity of this approach is O(n), where n is the number of nodes in the linked list, and 
 # the space complexity is also O(n) due to the additional list used to store the nodes.
 
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+
+class Solution:
+    def reorderList(self, head: Optional[ListNode]) -> None:
+        slow, fast = head, head.next
+
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+        
+        mid = slow.next
+        prev = slow.next = None
+        while mid:
+            temp = mid.next
+            mid.next = prev
+            prev = mid
+            mid = temp
+        first = head
+        second = prev
+
+        while second:
+            tmp1, tmp2 = first.next, second.next
+            first.next = second
+            second.next = tmp1
+            first, second = tmp1, tmp2
+
+#Optimal solution
+#We can solve this problem in O(n) time and O(1) space by using the slow and fast pointer technique to find the middle of the linked list,
+# reversing the second half of the linked list, and then merging the two halves together.
