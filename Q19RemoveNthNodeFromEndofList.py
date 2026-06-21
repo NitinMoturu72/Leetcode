@@ -52,3 +52,30 @@ class Solution:
 # We convert the linked list to an array, remove the nth element, and reconstruct the linked list.
 # The time complexity of this approach is O(n) due to the traversal of the linked list and reconstruction, 
 # and the space complexity is also O(n) due to the additional list used to store the nodes.
+
+class Solution:
+    def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
+        dummy = ListNode(0,head)
+
+        first = head
+        second  = dummy
+
+        while n>0:
+            first = first.next
+            n-=1
+        
+        while first:
+            first = first.next
+            second = second.next
+        
+        second.next = second.next.next
+
+        return dummy.next
+
+#Optimal Solution
+# We use two pointers to find the nth node from the end in a single pass.
+# We move the first pointer n steps ahead, and then move both pointers until the first pointer reaches the end.
+# The second pointer will be at the node just before the nth node from the end, allowing us to remove it.
+# Always use a dummy node to handle edge cases where the head might be removed.
+# The time complexity of this approach is O(n) due to the traversal of the linked list
+# and the space complexity is O(1) since we are using only a constant amount of extra space for the pointers.
