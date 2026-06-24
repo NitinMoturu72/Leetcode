@@ -56,3 +56,30 @@ class Solution:
 # Return the root of the inverted tree.
 # Time complexity: O(n), where n is the number of nodes in the tree. We visit each node once.
 # Space complexity: O(h), where h is the height of the tree.
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        if not root:
+            return None
+        
+        stack = [root]
+        while stack:
+            node = stack.pop()
+            node.left, node.right = node.right, node.left
+            if node.left:
+                stack.append(node.left)
+            if node.right:
+                stack.append(node.right)
+        return root
+    
+# Iterative Solution DFS
+# We use a stack to perform a depth-first traversal of the tree. 
+# For each node, we swap its left and right children, and then add its children to the stack if they exist.
+# Time complexity: O(n), where n is the number of nodes in the tree. We visit each node once.
+# Space complexity: O(h), where h is the height of the tree. In the worst case, the stack can contain all the nodes in a single path from the root to a leaf.
