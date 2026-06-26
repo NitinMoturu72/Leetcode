@@ -70,3 +70,30 @@ class Solution:
 # If the loop completes without returning False, return True, indicating that the trees are the same.
 # Time Complexity: O(n), where n is the number of nodes in the trees. We visit each node once.
 # Space Complexity: O(h), where h is the height of the trees. In the worst case, the stack will contain all the nodes in a single path from the root to a leaf node.
+
+
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
+        if not p and not q:
+            return True
+        if p and q and p.val==q.val:
+            return self.isSameTree(p.left,q.left) and self.isSameTree(p.right,q.right)
+        
+        else:
+            return False
+        
+
+# Recursive Solution DFS
+# Base case: If both trees are None, return True.
+# If one of the trees is None or their root values are not equal, return False.
+# Recursively call the isSameTree function on the left children of both trees and the right children of both trees.
+# Return the logical AND of the results of the recursive calls.
+# Time Complexity: O(n), where n is the number of nodes in the trees. We visit each node once.
+# Space Complexity: O(h), where h is the height of the trees. In the worst case, the recursion stack will contain all the nodes in a single path from the root to a leaf node.
