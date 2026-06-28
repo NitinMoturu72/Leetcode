@@ -66,3 +66,32 @@ class Solution:
 # Time Complexity: O(h), where h is the height of the tree.
 #  In the worst case, h can be equal to n, where n is the number of nodes in the tree. 
 # Space Complexity: O(h), where h is the height of the tree.
+
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        cur = root
+
+        while cur:
+            if max(p.val,q.val) < cur.val:
+                cur = cur.left
+            elif min(p.val,q.val) > cur.val:
+                cur = cur.right
+            else:
+                return cur
+            
+# Iterative solution
+# Start from the root and traverse the tree.
+# If both p and q are less than the current node, go to the left subtree.
+# If both p and q are greater than the current node, go to the right subtree.
+# Otherwise, the current node is the lowest common ancestor.
+# Time Complexity: O(h), where h is the height of the tree.
+# In the worst case, h can be equal to n, where n is the number of nodes in the tree.
+# Space Complexity: O(1), as we are using constant space.
