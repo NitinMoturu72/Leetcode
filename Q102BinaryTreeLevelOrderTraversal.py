@@ -64,3 +64,44 @@ class Solution:
 # time complexity: O(n), where n is the number of nodes in the tree. We visit each node once.
 # space complexity: O(n), where n is the number of nodes in the tree. 
 # In the worst case, we may have to store all nodes in the deque at once (for example, if the tree is a complete binary tree).
+
+
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+
+class Solution:
+    def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+        if not root:
+            return []
+
+        stack = [[root, 0]]
+        res = []
+        while stack:
+            pair = stack.pop()
+            node = pair[0]
+            level = pair[1]
+            if node:
+                stack.append([node.right, level+1])
+                stack.append([node.left, level+1])
+                if level <= len(res)-1:
+                    res[level].append(node.val)
+                else:
+                    res.append([node.val])
+        
+        return res
+
+# Depth first search
+# We use a stack to keep track of the nodes and their levels.
+# For each node, we add its value to the corresponding level in the result list.
+# We then add its children to the stack with their corresponding levels.
+# If the level does not exist in the result list, we create a new list for that level.
+# Else, we append the value to the existing list for that level.
+# time complexity: O(n), where n is the number of nodes in the tree. We visit each node once.
+# space complexity: O(n), where n is the number of nodes in the tree.
+
+
