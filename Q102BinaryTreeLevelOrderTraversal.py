@@ -105,3 +105,36 @@ class Solution:
 # space complexity: O(n), where n is the number of nodes in the tree.
 
 
+
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+
+class Solution:
+    def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+        res =[]
+
+        def dfs(node,depth):
+            if not node:
+                return None
+
+            if len(res) == depth:
+                res.append([])
+            
+            res[depth].append(node.val)
+            dfs(node.left,depth+1)
+            dfs(node.right,depth+1)
+        
+        dfs(root, 0)
+        return res
+
+# Depth first search recursive
+# We use a helper function to perform a depth-first search on the tree.
+# For each node, we check if the current depth is equal to the length of the result list. If it is, we create a new list for that depth.
+# We then add the node's value to the corresponding depth list and recursively call the helper function on the left and right children of the node, increasing the depth by 1.
+# time complexity: O(n), where n is the number of nodes in the tree. We visit each node once.
+# space complexity: O(h), where h is the height of the tree. In the worst case, h can be equal to n, where n is the number of nodes in the tree.
