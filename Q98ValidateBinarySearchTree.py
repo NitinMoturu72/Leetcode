@@ -55,3 +55,39 @@ class Solution:
 # Time complexity: O(n), where n is the number of nodes in the tree. We visit each node once.
 # Space complexity: O(h), where h is the height of the tree.
 # In the worst case, the height can be equal to the number of nodes in the tree (O(n)), but in a balanced tree, it would be O(log n).
+
+
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+
+class Solution:
+    def isValidBST(self, root: Optional[TreeNode]) -> bool:
+        stack = [[root, float("-inf"), float("inf")]]
+        while stack:
+            pair = stack.pop()
+            node = pair[0]
+            left = pair[1]
+            right = pair[2]
+
+            if not node:
+                continue
+            
+            if not (node.val > left and node.val < right):
+                return False
+            stack.append([node.left,left, node.val])
+            stack.append([node.right, node.val, right])
+
+        return True   
+    
+# Iterative DFS
+# We can also use an iterative depth-first search (DFS) approach to validate the binary search tree (BST).
+# We use a stack to keep track of the nodes and their valid ranges. For each node, we check if its value is within the valid range. 
+# If it is not, we return False. If it is, we add its children to the stack with their corresponding valid ranges.
+# Time complexity: O(n), where n is the number of nodes in the tree. We visit each node once.
+# Space complexity: O(h), where h is the height of the tree. 
+# In the worst case, the height can be equal to the number of nodes in the tree (O(n)), but in a balanced tree, it would be O(log n).
