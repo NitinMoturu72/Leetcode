@@ -57,3 +57,35 @@ class Solution:
 # After collecting the values, we sort the array and return the k-th smallest element.
 # Time complexity: O(n log n), where n is the number of nodes in the tree.
 # Space complexity: O(n), where n is the number of nodes in the tree, as we store all node values in an array.
+
+
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
+        cur = root
+        stack =[]
+
+        while stack or cur:
+            while cur:
+                stack.append(cur)
+                cur = cur.left
+            cur = stack.pop()
+            k -=1
+
+            if k ==0:
+                return cur.val
+            cur = cur.right
+
+# Iterative Inorder Traversal
+# The iterative inorder traversal approach leverages the property of binary search trees (BSTs) 
+# where an inorder traversal yields the node values in sorted order.
+# We use a stack to simulate the recursive traversal and keep track of the number of nodes visited.
+# Time complexity: O(h + k), where h is the height of the tree and 
+# k is the number of nodes visited until we reach the k-th smallest element.
+# Space complexity: O(h), where h is the height of the tree, as we store nodes in the stack during traversal.
