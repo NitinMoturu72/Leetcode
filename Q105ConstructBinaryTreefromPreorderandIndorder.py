@@ -45,3 +45,13 @@ class Solution:
         root.left = self.buildTree(preorder[1: mid+1], inorder[: mid])
         root.right = self.buildTree(preorder[mid+1:], inorder[mid+1:])
         return root
+    
+# Recursive Approach
+# The recursive approach involves selecting the first element of the preorder list as the root of the tree.
+# We then find the index of this root value in the inorder list, which allows us to determine the left and right subtrees.
+# We recursively build the left and right subtrees using the corresponding slices of the preorder and inorder lists.
+# Time complexity: O(n^2) in the worst case, where n is the number of nodes in the tree, due to the slicing of lists and searching for the root in the inorder list.
+# Space complexity: O(n) for the recursion stack and the space used to store the tree nodes.
+
+
+
