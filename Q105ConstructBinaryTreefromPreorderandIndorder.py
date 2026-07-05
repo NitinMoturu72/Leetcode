@@ -55,3 +55,35 @@ class Solution:
 
 
 
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def buildTree(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
+        indices = {val:idx for index, val in enumerate(inorder)}
+
+        self.pre_idx = 0
+
+        def dfs(l,r):
+            if l> r:
+                return None
+            root_val = preorder[self.pre_idx]
+            root = TreeNode(root_val)
+            self.pre_idx += 1
+            mid = indices[root_val]
+
+            root.left = dfs(l, mid-1)
+            root.right = dfs(mid+1, r)
+            return root
+        return dfs(0, len(inorder)-1)
+
+# Hashmap Approach
+# The hashmap approach optimizes the search for the root value in the inorder list by using a dictionary to store the indices of each value.
+# This allows for O(1) time complexity when looking up the index of the root value.
+# We maintain a pointer (pre_idx) to track the current index in the preorder list,
+# and we recursively build the left and right subtrees using the indices from the hashmap.
+# Time complexity: O(n), where n is the number of nodes in the tree, as we visit each node once.
+# Space complexity: O(n) for the recursion stack and the space used to store the tree nodes and the hashmap.
