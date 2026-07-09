@@ -63,3 +63,39 @@ class MedianFinder:
 # and the findMedian function sorts the list and calculates the median based on whether the length of the list is odd or even. 
 # Time complexity for addNum is O(m) and for findMedian is O(m * n log n) due to sorting. where m is the number of calls to addNum and n is the number of elements in the list.
 # Space complexity is O(n) for storing the numbers in the list.
+
+
+
+import heapq
+class MedianFinder:
+
+    def __init__(self):
+        self.small, self.large = [], []
+    def addNum(self, num: int) -> None:
+        if self.large and num > self.large[0]:
+            heapq.heappush(self.large, num)
+        else:
+            heapq.heappush(self.small, -1*num)
+        
+        if len(self.small) > len(self.large) + 1:
+            val = -1 * heapq.heappop(self.small)
+            heapq.heappush(self.large, val)
+        if len(self.large) > len(self.small) + 1:
+            val = heapq.heappop(self.large)
+            heapq.heappush(self.small, -1 * val)
+
+    def findMedian(self) -> float:
+        if len(self.small) > len(self.large):
+            return -1 * self.small[0]
+        elif len(self.large) > len(self.small):
+            return self.large[0]
+        return (-1 * self.small[0] + self.large[0])/2.0
+    
+
+# Optimized solution using two heaps
+# We can use two heaps to maintain the lower half and upper half of the numbers.
+# The small heap (max-heap) will store the lower half of the numbers, and the large heap (min-heap) will store the upper half of the numbers.
+# When we add a number, we first check which heap it belongs to based on the value, and then balance the heaps if necessary.
+# The findMedian function checks the sizes of the heaps and returns the median based on whether the total number of elements is odd or even.
+# Time complexity for addNum is O(m * log n) and for findMedian is O(m) where m is the number of calls to addNum and n is the number of elements in the heaps.
+# Space complexity is O(n) for storing the numbers in the heaps.
