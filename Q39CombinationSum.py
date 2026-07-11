@@ -64,3 +64,36 @@ class Solution:
 # We can either include the current candidate in the combination or skip it and move to the next candidate.
 # Time complexity is O(2^n) in the worst case, where n is the number of candidates, as we explore all possible combinations.
 # Space complexity is O(2^n) for the recursion stack and the current combination list cur. 
+
+
+
+
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        res = []
+        candidates.sort()
+
+        def dfs(i, cur, total):
+            if total == target:
+                res.append(cur.copy())
+                return
+            for j in range(i, len(candidates)):
+                if total + candidates[j] > target:
+                    return
+                
+                cur.append(candidates[j])
+                dfs(j, cur, total+ candidates[j])
+                cur.pop()
+
+        dfs(0, [], 0)
+        return res
+    
+
+# Optimized backtracking solution
+# We can optimize the backtracking solution by sorting the candidates array and pruning the search space.
+# In the dfs function, we iterate through the candidates starting from index i.
+# If the total sum exceeds the target, we can break the loop as all subsequent candidates will also exceed the target due to sorting.
+# This reduces the number of recursive calls and improves the efficiency of the solution.
+# Time complexity is O(2^n) in the worst case, where n is the number of candidates, as we explore all possible combinations.
+# Space complexity is O(2^n) for the recursion stack and the current combination list cur. 
+# However, the pruning reduces the number of recursive calls in practice, making it more efficient than the brute-force approach.
